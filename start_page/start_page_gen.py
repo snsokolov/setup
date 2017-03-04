@@ -1,12 +1,6 @@
 #!/usr/bin/env python
-"""
-    Title:          start_page_gen.py
-    Creation Date:  21/12/2014
-    Dscription:     Start page generator
+# start_page_gen.py - Start bage generator program by Sergey 2014
 
-"""
-
-# Standard libraries
 import unittest
 import sys
 import os
@@ -15,18 +9,6 @@ import re
 import random
 import subprocess
 import getpass
-
-# Additional libraries
-# FIXME: Move all used filehelp functions here
-import filehelp
-
-###############################################################################
-# Helping functions
-###############################################################################
-
-
-def foo(bar):
-    return bar
 
 ###############################################################################
 # Start Class
@@ -40,14 +22,12 @@ class Start:
     LOGO_W = 65
     LOGO_H = 30
     SUBM_W = 100
-    OUT = "start.html"
+    OUT = "start_page.html"
 
-    def __init__(self, arg_str=""):
-        """ Default constructor """
-
-    def get_form_str(self, title, input_name, url, logo_url, hidden={}):
+    def get_form_str(self, title, input_name, url, hidden={}):
         """ Generate Input form HTML code """
         comment = "<!-- " + title + " -->"
+        logo_url = "imgs/" + title + ".jpg"
         search_h = (
             "<table width=100% height=" + str(self.SEARCH_H) + ">" +
             "<tr><td align=center>")
@@ -97,96 +77,92 @@ class Start:
         # Make sure forms can pass russian characters correctly
         self.page_str += (
             "<META http-equiv=Content-Type " +
-            "content=\"text/html; charset=utf-8\">")  # old: windows-1251
+            "content=\"text/html; charset=utf-8\">\n")  # old: windows-1251
 
         self.page_str += self.get_form_str(
             "Yandex", "text",
             "http://www.yandex.ru/yandsearch",
-            "http://img.yandex.net/i/www/logo.png")
+        )
         self.page_str += self.get_form_str(
             "Google(EN)", "q",
             "http://www.google.com/search",
-            "http://www.google.com/images/srpr/logo11w.png")
+        )
         self.page_str += self.get_form_str(
             "Google(RU)", "q",
             "http://www.google.com/search",
-            "http://www.google.com/images/srpr/logo11w.png",
-            {"hl": "ru"})
+            {"hl": "ru"}
+        )
         self.page_str += self.get_form_str(
             "Bing", "q",
             "http://www.bing.com/search",
-            "http://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/" +
-            "Bing_logo_%282013%29.svg/200px-Bing_logo_%282013%29.svg.png")
+        )
         self.page_str += self.get_form_str(
             "Translate(Ya)", "text",
             "http://slovari.yandex.ru/search.xml",
-            "https://upload.wikimedia.org/wikipedia/ru/a/ad/" +
-            "%D0%AF%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%BB%D0%BE%D0%B3.jpg")
+        )
         self.page_str += self.get_form_str(
             "Translate(G)", "q",
             "http://translate.google.com",
-            "http://upload.wikimedia.org/wikipedia/commons/d/db/" +
-            "Google_Translate_Icon.png",
-            {"hl": "ru"})
+            {"hl": "ru"},
+        )
         self.page_str += self.get_form_str(
             "Wiki(EN)", "search",
             "http://en.wikipedia.org/wiki/Search",
-            "http://upload.wikimedia.org/wikipedia/commons/thumb/d/de/" +
-            "Wikipedia_Logo_1.0.png/240px-Wikipedia_Logo_1.0.png")
+        )
         self.page_str += self.get_form_str(
             "Wiki(RU)", "search",
             "http://ru.wikipedia.org/wiki/Search",
-            "http://upload.wikimedia.org/wikipedia/commons/thumb/d/de/" +
-            "Wikipedia_Logo_1.0.png/240px-Wikipedia_Logo_1.0.png")
+        )
         self.page_str += self.get_form_str(
             "Finance(G)", "q",
             "https://www.google.com/finance",
-            "http://upload.wikimedia.org/wikipedia/en/1/19/" +
-            "Google_Finance_Beta_logo.png")
+        )
         self.page_str += self.get_form_str(
             "Maps(G)", "q",
             "http://maps.google.com/maps",
-            "http://upload.wikimedia.org/wikipedia/commons/9/9a/" +
-            "Google_maps_logo.png",
-            {"output": "classic"})
+            {"output": "classic"},
+        )
         self.page_str += self.get_form_str(
             "Maps(Bing)", "q",
             "http://www.bing.com/maps/default.aspx",
-            "http://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/" +
-            "Bing_logo_%282013%29.svg/200px-Bing_logo_%282013%29.svg.png")
+        )
         self.page_str += self.get_form_str(
             "Youtube", "search_query",
             "http://www.youtube.com/results",
-            "http://www.youtube.com/yt/brand/media/image/" +
-            "YouTube-logo-full_color.png")
+        )
         self.page_str += self.get_form_str(
             "Zillow", "citystatezip",
             "http://www.zillow.com/search/RealEstateSearch.htm",
-            "http://www.zillowstatic.com/static/images/m/apple-touch-icon.png")
+        )
         self.page_str += self.get_form_str(
             "Archive", "url",
             "http://web.archive.org/form-submit.jsp",
-            "http://archive.org/web/images/logo_wayback_210x77.png",
-            {"type": "urlquery"})
+            {"type": "urlquery"},
+        )
         self.page_str += self.get_form_str(
             "Whois", "query",
             "http://www.nic.ru/whois/",
-            "http://www.nic.ru/images/logo.gif",
-            {"ask_registrar": "1"})
+            {"ask_registrar": "1"},
+        )
 
-        filehelp.write_file(self.OUT, self.page_str, append=0)
-
-
-###############################################################################
-# Executable code
-###############################################################################
+        write_file(self.OUT, self.page_str, append=0)
 
 
-def main():
+def write_file(filename, file_str, append=0):
+    """ Write string into a file (will overwrite existing file) """
+    fh = open(filename, "a+" if append else "w", newline="\n")
+    fh.write(file_str + "\n")
+    fh.close()
 
-    # Sandbox
-    sb = Start(" ".join(sys.argv[1:]))
-    sb.run()
+
+def read_file(filename):
+    """ Read a string from a file """
+    fh = open(filename, "r")
+    file_str = fh.read()
+    file_str = re.sub("$\n", "", file_str)
+    fh.close()
+    return file_str
+
 
 ###############################################################################
 # Unit Tests
@@ -200,10 +176,6 @@ class unitTests(unittest.TestCase):
     tmp_file = test_area + "/f" + str(random.randrange(10000))
     os.makedirs(test_area, exist_ok=True)
 
-    def test_helping_functions(self):
-        """ Helping functions testing """
-        self.assertEqual(foo("bar"), "bar")
-
     def test_Start_class__basic_functionality(self):
         """ Start class basic testing """
         d = Start()
@@ -212,11 +184,11 @@ class unitTests(unittest.TestCase):
         """ Generate Input form HTML code """
         d = Start()
         form_str = d.get_form_str(
-            "Title", "input_name", "url", "logo_url")
+            "Title", "input_name", "url")
         self.assertTrue(re.search("Title", form_str))
         self.assertTrue(re.search("name=input_name", form_str))
         form_str = d.get_form_str(
-            "Title", "input_name", "url", "logo_url", {"hid": "dn"})
+            "Title", "input_name", "url", {"hid": "dn"})
         self.assertTrue(re.search("type=hidden name=hid value=dn", form_str))
 
     def test_Start_class__run(self):
@@ -227,7 +199,7 @@ class unitTests(unittest.TestCase):
 
         d = Start()
         d.run(test=True)
-        out_str = filehelp.read_file(d.OUT)
+        out_str = read_file(d.OUT)
 
         # Changing current directory back
         os.remove(d.OUT)
@@ -239,4 +211,4 @@ class unitTests(unittest.TestCase):
 if __name__ == "__main__":
     if sys.argv[-1] == "-ut":
         unittest.main(argv=[" "])
-    main()
+    Start().run()
