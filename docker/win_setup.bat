@@ -5,12 +5,15 @@
 echo PLEASE RUN AS ADMINISTRATOR!
 
 :: 1. Remove old default virtual machine.
+:: If you get "error removing host default. The system cannot find the file
+:: specified.", delete the machine directory manually and remove
+:: C:\Users\%USER%\.VirtualBox directory.
 docker-machine rm default
 
 :: 2. Create new default virtual machine.
 :: Manually install vbox driver if you get "VBoxManage.exe: error"
 :: C:\Program Files\Oracle\VirtualBox\drivers\vboxdrv\VBoxDrv.inf .
-docker-machine create default || goto :EOF
+docker-machine create -d virtualbox --virtualbox-disk-size "6000" default || goto :EOF
 
 :: 3. Connect your Docker client to the Docker engine runnin on default virtual
 :: machine.
