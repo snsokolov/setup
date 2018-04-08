@@ -8,19 +8,14 @@ Git Install: http://git-scm.com/download/win
 
 ## Setup scripts
 
-Run `setup_all.bat` script to setup/re-setup everything, or run sep by step
-setup scripts for each particular step.
+Run `setup.bat` script to setup/re-setup everything. It is okay to run the
+script multiple times.
 
-    :: Run everything
-    setup_all.bat
+    :: Setup everything.
+    setup.bat
 
-Step by step setup scripts:
+Steps of the setup:
 
-    :: 1. Setup global env variables and enable sh execution.
-    setup_admin.bat
-
-    :: 2. Clone all repos.
-    clone_repos.bat
-
-    :: 3. Setup RC files.
-    rc_files.bat
+1. Setup global env variables and enable sh execution.
+2. Clone all repos.
+3. Setup RC files.
