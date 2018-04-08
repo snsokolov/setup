@@ -8,14 +8,13 @@ Git Install: http://git-scm.com/download/win
 
 ## Setup scripts
 
-Run `setup.bat` script to setup/re-setup everything. It is okay to run the
-script multiple times.
-
-    :: Setup everything.
-    setup.bat
+Download the [setup.bat](
+https://raw.githubusercontent.com/snsokolov/setup/master/win_setup/setup.bat)
+script and run it to setup/re-setup everything. It is okay to run the script
+multiple times.
 
 Steps of the setup:
 
-1. Setup global env variables and enable sh execution.
+1. (Admin) Setup global env variables and enable sh execution.
 2. Clone all repos.
 3. Setup RC files.
