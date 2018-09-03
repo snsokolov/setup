@@ -81,7 +81,7 @@ class Start:
 
         self.page_str += self.get_form_str(
             "Yandex", "text",
-            "http://www.yandex.ru/yandsearch",
+            "https://yandex.ru/search",
         )
         self.page_str += self.get_form_str(
             "Google(EN)", "q",
