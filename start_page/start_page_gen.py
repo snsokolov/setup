@@ -80,10 +80,6 @@ class Start:
             "content=\"text/html; charset=utf-8\">\n")  # old: windows-1251
 
         self.page_str += self.get_form_str(
-            "Yandex", "text",
-            "https://yandex.ru/search",
-        )
-        self.page_str += self.get_form_str(
             "Google(EN)", "q",
             "http://www.google.com/search",
         )
@@ -95,10 +91,6 @@ class Start:
         self.page_str += self.get_form_str(
             "Bing", "q",
             "http://www.bing.com/search",
-        )
-        self.page_str += self.get_form_str(
-            "Translate(Ya)", "text",
-            "http://slovari.yandex.ru/search.xml",
         )
         self.page_str += self.get_form_str(
             "Translate(G)", "q",
